@@ -22,8 +22,10 @@ if [ $task == "instruction_counts" ]
 then    
     cd perfelf
     for ELF in * ;do 
-        objdump -d $ELF > ../disassembly/$ELF; 
-        
+        if [ $ELF != ".gitignore" ]
+        then
+            objdump -d $ELF > ../disassembly/$ELF; 
+        fi
     done
     cd ..
     cargo run instruction_counts $perfdata > instruction_counts.txt;

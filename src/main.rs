@@ -18,7 +18,11 @@ fn main() {
 
   for path in paths {
     let bin_data = fs::read(path.as_ref().unwrap().path()).unwrap();
-    let parsed = addr2line::object::read::File::parse(bin_data.as_slice()).unwrap();
+    let parsed = addr2line::object::read::File::parse(bin_data.as_slice());
+    if parsed.is_err(){
+      continue;
+    }
+    let parsed = parsed.unwrap();
     let redleaf_ctxt = addr2line::Context::new(&parsed).unwrap();
     unsafe{
       CTXTS.push((path.unwrap().file_name().to_str().unwrap().to_string(),redleaf_ctxt));
