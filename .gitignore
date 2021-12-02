@@ -1,0 +1,6 @@
+/target
+Cargo.lock
+flame_graph.folded
+function_counts.txt
+instruction_counts.txt
+perf.svg
